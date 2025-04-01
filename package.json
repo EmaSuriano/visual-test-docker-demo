@@ -8,8 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "jest",
-    "test:update": "jest --updateSnapshot"
+    "test": "concurrently -k -s first \"npm run dev\" \"jest --forceExit\"",
+    "test:update": "concurrently -k -s first \"npm run dev\" \"jest --updateSnapshot --forceExit\""
   },
   "dependencies": {
     "react": "^19.0.0",
@@ -25,6 +25,7 @@
     "@types/react-dom": "^19.0.4",
     "@vitejs/plugin-react": "^4.0.0",
     "@vitejs/plugin-react-swc": "^3.8.0",
+    "concurrently": "^9.1.2",
     "eslint": "^9.21.0",
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.19",

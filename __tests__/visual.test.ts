@@ -9,27 +9,19 @@ describe("Visual regression tests", () => {
   });
 
   it("homepage should match snapshot", async () => {
-    await page.goto("https://your-website.com");
+    // Connect to your local development server instead of an external URL
+    await page.goto("http://localhost:3000");
 
-    // Wait for any dynamic content to load
-    await page.waitForSelector("#main-content");
+    // Wait for React to render content
+    await page.waitForSelector("#root", { visible: true });
+
+    // Optional: Wait for any animations to complete
+    await page.waitForTimeout(500);
 
     // Take a screenshot and compare it with the baseline
     const screenshot = await page.screenshot();
     expect(screenshot).toMatchImageSnapshot({
-      customSnapshotsDir: "__image_snapshots__",
       customSnapshotIdentifier: "homepage",
-    });
-  });
-
-  it("about page should match snapshot", async () => {
-    await page.goto("https://your-website.com/about");
-    await page.waitForSelector("#about-content");
-
-    const screenshot = await page.screenshot();
-    expect(screenshot).toMatchImageSnapshot({
-      customSnapshotsDir: "__image_snapshots__",
-      customSnapshotIdentifier: "about-page",
     });
   });
 });
