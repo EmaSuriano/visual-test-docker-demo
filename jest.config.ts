@@ -1,23 +1,8 @@
-// jest.config.ts
-import type { Config } from 'jest';
-
-const config: Config = {
-  preset: 'ts-jest',
-  testEnvironment: 'node',
-  extensionsToTreatAsEsm: ['.ts'],
-  moduleNameMapper: {
-    '^(\\.{1,2}/.*)\\.js$': '$1',
-  },
+module.exports = {
+  preset: "jest-puppeteer",
+  testMatch: ["**/__tests__/**/*.test.ts"],
   transform: {
-    '^.+\\.tsx?$': [
-      'ts-jest',
-      {
-        useESM: true,
-      },
-    ],
+    "^.+\\.tsx?$": "ts-jest",
   },
-  testMatch: ['**/tests/**/*.test.ts'],
-  setupFilesAfterEnv: ['./tests/setup.ts'],
+  setupFilesAfterEnv: ["./jest.setup.js"],
 };
-
-export default config;
